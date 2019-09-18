@@ -1,4 +1,4 @@
-package com.services.authentication;
+package com.auth0.authentication;
 
 import org.apache.sling.auth.core.AuthUtil;
 import org.apache.sling.auth.core.spi.AuthenticationHandler;

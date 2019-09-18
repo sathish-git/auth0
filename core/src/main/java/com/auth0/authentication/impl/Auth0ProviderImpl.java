@@ -1,28 +1,22 @@
-package com.services.authentication.impl;
+package com.auth0.authentication.impl;
 
 import com.adobe.cq.social.connect.oauth.ProviderUtils;
 import com.adobe.granite.auth.oauth.Provider;
 import com.adobe.granite.auth.oauth.ProviderType;
-import com.generic.services.authentication.config.Auth0ProviderConfiguration;
-import com.services.authentication.impl.Auth0Api;
+import com.auth0.authentication.config.Auth0ProviderConfiguration;
 import org.apache.jackrabbit.api.security.user.Authorizable;
 import org.apache.jackrabbit.api.security.user.User;
 import org.apache.sling.api.SlingHttpServletRequest;
-import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceResolverFactory;
-import org.osgi.framework.Constants;
-import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.metatype.annotations.Designate;
 import org.scribe.builder.api.Api;
-import org.scribe.model.OAuthConfig;
 import org.scribe.model.OAuthRequest;
 import org.scribe.model.Response;
 import org.scribe.model.Verb;
-import org.scribe.oauth.OAuthService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,8 +25,6 @@ import javax.jcr.Session;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.day.cq.search.eval.XPath.getPropertyPath;
 
 @Component(
         service = Provider.class,
@@ -48,7 +40,7 @@ public class Auth0ProviderImpl implements Provider {
 
     private Session session;
 
-    private static final String SUBSERVICE = "auth0";
+    private static final String AUTH0_SUBSERVICE = "auth0";
 
     private String id;
 
@@ -78,7 +70,7 @@ public class Auth0ProviderImpl implements Provider {
         auth0Api.setAuthorizationUrl(config.authorizationUrl());
 
         Map<String, Object> credentialsMap = new HashMap<>();
-        credentialsMap.put(ResourceResolverFactory.SUBSERVICE, SUBSERVICE);
+        credentialsMap.put(ResourceResolverFactory.SUBSERVICE, AUTH0_SUBSERVICE);
         resourceResolver = resourceResolverFactory.getServiceResourceResolver(credentialsMap);
         session = resourceResolver.adaptTo(Session.class);
     }

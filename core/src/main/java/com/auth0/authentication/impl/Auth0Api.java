@@ -1,4 +1,4 @@
-package com.services.authentication.impl;
+package com.auth0.authentication.impl;
 
 import org.scribe.builder.api.DefaultApi20;
 import org.scribe.model.OAuthConfig;
